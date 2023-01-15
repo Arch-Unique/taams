@@ -34,7 +34,8 @@ router.get("/generate/:number", (req, res) => {
 
   let codesDB = [];
   for (let index = 0; index < codes.length; index++) {
-    const element = codes[index];
+    // const element = codes[index];
+    const element = index;
     codesDB.push({
       token: element,
       is_used: false,

@@ -4,4 +4,8 @@ const Sequelize = require("sequelize");
 // });
 module.exports = new Sequelize("unnattendance", "root", "montanahomz", {
   dialect: "mysql",
+  host: "localhost",
+  dialectOptions: {
+    socketPath: "/var/run/mysqld/mysqld.sock",
+  },
 });
