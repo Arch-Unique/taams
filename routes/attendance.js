@@ -9,14 +9,27 @@ router.post("/create", (req, res) => {
   const fullname = att.surname + " " + att.firstname;
   console.log(att);
 
-  Attendance.create({
-    regno: att.regno,
-    coursecode: att.coursecode,
-    faculty: att.faculty,
-    fullname: fullname,
-    department: att.department,
-    level: att.level,
-    testno: att.no,
+  Attendance.findOrCreate({
+    where: {
+      regno: att.regno,
+      coursecode: att.coursecode,
+      faculty: att.faculty,
+      fullname: fullname,
+      department: att.department,
+      level: att.level,
+      createdAt: {
+        [Op.gt]: new Date(new Date().setHours(0, 0, 0, 0)).getTime(),
+      },
+    },
+    defaults: {
+      regno: att.regno,
+      coursecode: att.coursecode,
+      faculty: att.faculty,
+      fullname: fullname,
+      department: att.department,
+      level: att.level,
+      testno: att.no,
+    },
   })
     .then((result) => {
       res.status(200).json({ status: "success", msg: "Inserted successfully" });
@@ -25,6 +38,16 @@ router.post("/create", (req, res) => {
       res.status(404).json({ status: "error", msg: err });
       console.log(err);
     });
+
+  // Attendance.create({
+  //   regno: att.regno,
+  //   coursecode: att.coursecode,
+  //   faculty: att.faculty,
+  //   fullname: fullname,
+  //   department: att.department,
+  //   level: att.level,
+  //   testno: att.no,
+  // })
 });
 
 //query attendance entry
