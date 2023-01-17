@@ -2,7 +2,7 @@ const express = require("express");
 const Attendance = require("../models/attendance");
 const router = express.Router();
 const { Op } = require("sequelize");
-const sequelize = require("./config/connection");
+const sequelize = require("../config/connection");
 
 //create attendance entry
 router.post("/create", (req, res) => {
