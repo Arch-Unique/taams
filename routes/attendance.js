@@ -2,6 +2,7 @@ const express = require("express");
 const Attendance = require("../models/attendance");
 const router = express.Router();
 const { Op } = require("sequelize");
+const sequelize = require("./config/connection");
 
 //create attendance entry
 router.post("/create", (req, res) => {
@@ -48,6 +49,17 @@ router.post("/create", (req, res) => {
   //   level: att.level,
   //   testno: att.no,
   // })
+});
+
+//drop attendance entry
+router.get("/dropdb", async (req, res) => {
+  try {
+    await sequelize.sync({ force: true });
+    res.status(200).json({ status: "success", msg: "DB Dropped" });
+  } catch (error) {
+    res.status(404).json({ status: "error", msg: err });
+    console.log(err);
+  }
 });
 
 //query attendance entry
