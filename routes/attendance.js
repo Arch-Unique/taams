@@ -63,7 +63,7 @@ router.get("/dropdb", async (req, res) => {
 });
 
 //query attendance entry
-router.post("/query-app", (req, res) => {
+router.post("/query", (req, res) => {
   const query = req.body.input;
   const queryType = req.body.inputtype;
   const from = parseInt(req.body.from);
@@ -131,7 +131,7 @@ router.post("/query-app", (req, res) => {
 });
 
 //query attendance entry by map
-router.post("/query", (req, res) => {
+router.post("/query-map", (req, res) => {
   const query = req.body.input;
   const from = parseInt(req.body.from);
   const to = parseInt(req.body.to);
